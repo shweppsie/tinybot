@@ -103,9 +103,8 @@ def tiny(user,channel,msg):
             return x
         if not debug:
             try:
-                #f = fetch_url("http://is.gd/api.php?longurl=" + x.replace("%","%25"))
-                #r = f.read()
-                f = fetch_url("http://geek.cn/create.php?type=raw&url="+urlencode(x))
+                f = fetch_url("http://is.gd/api.php?longurl=" + urlencode(x))
+                #f = fetch_url("http://geek.cn/create.php?type=raw&url="+urlencode(x))
                 r = f.read()
                 print "url:",`x`,"tinyurl:",`r`
                 tinycache[x] = r
