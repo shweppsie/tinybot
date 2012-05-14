@@ -172,12 +172,6 @@ def tiny(user,channel,msg):
                 bits.append(msg)
             break
         starttext, url, frag, msg = a.groups()
-        if url.find("tinybot") >= 0:
-            # don't allow links to urls related to us - save it
-            # to 'bits' as-is
-            txt = "".join(map(lambda x:x or "", (starttext, url, frag)))
-            bits.append(txt)
-            continue
         tinied = tinyurl(url)
         if frag:
             tinied += frag
