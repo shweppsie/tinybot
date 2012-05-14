@@ -75,9 +75,14 @@ def get_summary(url, page):
         return None
 
 if __name__ == "__main__":
-        import sys
-        f = open(sys.argv[1], "r")
-        print get_summary("http://github.com/scottr/tinybot/tree/4171b7e9cf1edd782a8c5fb5af1a3a581b8f4610", f.read())
+        import sys, urllib
+        if len(sys.argv[1:]) > 0:
+                testurl = sys.argv[1]
+        else:
+                testurl = 'http://github.com/scottr/tinybot/tree/4171b7e9cf1edd782a8c5fb5af1a3a581b8f4610'
+
+        f = urllib.urlopen(testurl)
+        print get_summary(testurl, f.read())
         f.close()
 
 
