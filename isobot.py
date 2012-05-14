@@ -34,6 +34,7 @@ class IsoBot(irc.IRCClient):
         if tiny_settings.x_login:
             self.msg("x@channels.undernet.org", tiny_settings.x_login)
         self.mode(self.nickname, '+', 'ix')
+        self.join_channels()
 
     def join_channels(self):
         for channel, key in tiny_settings.channels.items():
