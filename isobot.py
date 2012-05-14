@@ -54,10 +54,6 @@ class IsoBot(irc.IRCClient):
         if command in ["ERR_BADCHANNELKEY"]:
             print "WARNING:",command,params
             return
-        # Our host is now hidden, we can join channels now
-        if command == "396": # RPL_HOSTHIDDEN
-            self.join_channels()
-            return
         if command == "INVITE":
             who,channel = params[:2]
             print "Invited to",channel,"by",prefix
