@@ -87,6 +87,12 @@ class IsoBot(irc.IRCClient):
             target = user
             reply = 'sorry, I\'m just a bot'
         else:
+            # ignore our own messages
+            if user == tiny_settings.nickname:
+                return
+            # ignore channel scrollback
+            if (re.match(r'^\[\d\d/\d\d/\d\d \d\d:\d\d:\d\d]', msg)):
+                return
             # see if this message should get a response
             reply = tinyurl.tiny(user, channel, msg)
             if reply is not None: 
