@@ -9,6 +9,7 @@ import sys
 import urlparse
 import urllib # for urlencode
 import StringIO
+import gzip
 
 import atom
 import websites
@@ -23,7 +24,7 @@ def urlencode(x):
     r=""
     for i in x:
         if i in "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_.":
-            r+=i    
+            r+=i
         else:
             r+="%%%02x" % ord(i)
     return r
@@ -53,6 +54,10 @@ def fetch_url(url):
         n = urllib2.urlopen(u)
     except Exception, e:
         return StringIO.StringIO(str(e))
+    if n.info().get('Content-Encoding') == 'gzip':
+        buf = StringIO.StringIO(n.read())
+        f = gzip.GzipFile(fileobj=buf)
+        n = f
     return n
 
 
@@ -176,7 +181,7 @@ def tiny(user,channel,msg):
         if frag:
             tinied += frag
             url += frag
-        if len(tinied) <= len(url): 
+        if len(tinied) <= len(url):
             if starttext:
                 bits = bits+[starttext]
             bits = bits+[(tinied, findsummary(url))]
@@ -225,7 +230,7 @@ def tiny(user,channel,msg):
     atomitems.sort()
     atomitems.reverse()
     atom.generate_atom(channel,atomitems[:30])
-        
+
     return msg
 
 
