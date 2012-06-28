@@ -90,6 +90,8 @@ class IsoBot(irc.IRCClient):
             # ignore our own messages
             if user == tiny_settings.nickname:
                 return
+            if user in tiny_settings.ignore_users:
+                return
             # ignore channel scrollback
             if (re.match(r'^\[\d\d/\d\d/\d\d \d\d:\d\d:\d\d]', msg)):
                 return

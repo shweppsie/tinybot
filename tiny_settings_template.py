@@ -25,3 +25,6 @@ atomdir = "/home/alastair/"
 
 # url to this directory (with a trailing slash)
 atomdir_url = "http://coders.meta.net.nz/~perry/tinybot/"
+
+# list of users to ignore
+ignore_users = ['bot'] 
